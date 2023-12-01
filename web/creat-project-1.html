@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+	<head>
+		<!-- 初始设置 -->
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1.0" />
+		<title>模型转换页面</title>
+		<link rel="stylesheet"  href="styles/creat-project-1.css" />
+		<script src="scripts/creat-project-1.js" defer></script>
+		<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	</head>
+	<body style="overflow-x: hidden;overflow-y: hidden">
+		<!-- 容器 -->
+		<div id="container">
+			<!-- 顶部栏 -->
+			<header class="top">
+				<div class="top_left"><img src="./images/logo.png" ></div>
+				<div class="top_name">基于知识蒸馏的模型转换工具</div>
+			</header>
+		</div>
+		<!-- 参数表单 -->
+		<div class="login">	
+			<form name="myForm" target="rfFrame">
+				<!-- 项目设置表格 -->
+				<table class="pra">
+					<caption class="titl">项目设置</caption>
+					<!-- 项目名称输入框 -->
+					<tr>
+						<td class="pra_title">项目名称：</td>
+						<td>
+						<input type="text" name="project_name" placeholder="请输入" class="input"/>
+						</td>
+					</tr>
+					<!-- 损失函数选择框 -->
+					<tr>
+						<td class="pra_title">损失函数：</td>
+						<td>
+							<input type="text" name="loss" list="Elist" placeholder="请选择" class="input"/>
+							<datalist id="Elist">
+								<option>KL</option>
+							</datalist>
+						</td>
+					</tr>
+					<!-- 教师框架选择框 -->
+					<tr>
+						<td class="pra_title">教师框架：</td>
+						<td>
+							<input type="text" name="frameT" list="TPlist" placeholder="请选择" class="input"/>
+							<datalist id="TPlist">
+								<option>PyTorch</option>
+							</datalist>
+						</td>
+					</tr>
+					<!-- 教师模型选择框 -->
+					<tr>
+						<td class="pra_title">教师模型：</td>
+						<td>
+							<input type="text" name="module_T" list="Tlist" placeholder="请选择" class="input"/>
+							<datalist id="Tlist">
+								<option>ResNet101</option>
+								<option>ResNet50</option>
+								<option>ResNet34</option>
+							</datalist>
+						</td>
+					</tr>
+					<!-- 学生框架选择框 -->
+					<tr>
+						<td class="pra_title">学生框架：</td>
+						<td>
+							<input type="text" name="frameS" list="SPlist" placeholder="请选择" class="input"/>
+							<datalist id="SPlist">
+								<option>PaddlePaddle</option>
+							</datalist>
+						</td>
+					</tr>
+					<!-- 学生模型选择框 -->
+					<tr>
+						<td class="pra_title">学生模型：</td>
+						<td>
+							<input type="text" name="module_S" list="Slist" placeholder="请选择" class="input"/>
+							<datalist id="Slist">
+								<option>ResNet18</option>
+							</datalist>
+						</td>
+					</tr>
+					<!-- 样本数据选择框 -->
+					<tr>
+						<td class="pra_title">样本数据：</td>
+						<td>
+							<input type="text" name="data_sample" list="datalist" placeholder="请选择" class="input"/>
+							<datalist id="datalist">
+								<option>CIFAR10</option>
+							</datalist>
+						</td>
+					</tr>
+				</table>
+				<!-- 参数设置表格 -->
+				<table class="argu">
+					<caption class="titl">参数设置</caption>
+					<!-- 蒸馏温度输入框 -->
+					<tr>
+						<td class="argu_title">蒸馏温度：</td>
+						<td>
+							<input type="text" name="T" placeholder="请输入(>0)" class="input"/>
+						</td>
+					</tr>
+					<!-- alpha值输入框 -->
+					<tr>
+						<td class="argu_title">alpha值：</td>
+						<td>
+							<input type="text" name="alpha" placeholder="请输入(0~1)" class="input"/>
+						</td>
+					</tr>
+					<!-- epoch值输入框 -->
+					<tr>
+						<td class="argu_title">epoch值：</td>
+						<td>
+							<input type="text" name="epoch" placeholder="请输入(>0)" class="input"/>
+						</td>
+					</tr>
+				</table>
+			</form>
+		</div>
+		<!-- “开始训练”控制按钮 -->
+		<div class="control">
+			<table class="control1">
+				<tr>
+					<td colspan="2" class="start">
+						<input type="button" value="开始训练" class="button" onclick="submitFrom();"/>
+					</td>
+				</tr>
+			</table>	
+		</div>
+		<!-- 转换过程展示区域 -->
+		<div class="Frame">
+			<p id="writeData" class="process">转换过程</p>	
+			<iframe id="rfFrame" name="rfFrame" src="./data.html" width="1100" height="550" style="border-radius: 5px;border-width: 2px;border-color: black;" scrolling="no"></iframe>	
+		</div>
+	</body>
+</html> 

@@ -1,0 +1,16 @@
+KL散度: 
+epoches:0, accurate=0.42399999499320984
+epoches:1, accurate=0.6575000286102295
+epoches:2, accurate=0.7174999713897705
+epoches:3, accurate=0.7480000257492065
+epoches:4, accurate=0.7745000123977661
+epoches:5, accurate=0.7900000214576721
+epoches:6, accurate=0.8105000257492065
+epoches:7, accurate=0.8144999742507935
+epoches:8, accurate=0.824999988079071
+epoches:9, accurate=0.8360000252723694
+epoches:10, accurate=0.8355000019073486
+epoches:11, accurate=0.8424999713897705
+epoches:12, accurate=0.8479999899864197
+epoches:13, accurate=0.8489999771118164
+epoches:14, accurate=0.8489999771118164

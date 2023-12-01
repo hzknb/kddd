@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+	<!-- 初始设置 -->
+    <meta charset="utf-8" />
+    <title>模型蒸馏</title>
+    <link rel="stylesheet"  href="./styles/data.css" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  </head>
+  <body>
+    <div class="login">
+		<!-- 数据展示区域 -->
+      <div class="data">    
+          <p id="lastStamp" class="train_data">未开始训练</p>
+      </div>
+    </div>
+    <script type="text/javascript">
+      $(document).ready(function() {
+				$.ajax({
+					type: 'POST', // 请求类型为POST
+					url: 'http://localhost:5050/get_data', // 请求的URL地址
+					dataType: 'text', // 返回的数据类型为文本
+					jsonp:'jsoncallback',  // 使用jsonp格式处理跨域请求
+					async: true, // 使用同步操作 
+					cache: false, // 不使用缓存
+					timeout : 50000, //超时时间：50秒
+					success: function (result) {
+						//请求成功时执行该函数内容，result即为服务器返回的json对象
+						var a = document.getElementById('lastStamp');
+					 	a.textContent = result;
+					},
+					error: function (jqXHR, textStatus, errorThrown) {
+						//请求失败时执行该函数内容
+
+						/*弹出jqXHR对象的信息*/
+						alert(jqXHR.responseText);
+						alert(jqXHR.status);
+						/*弹出其他两个参数的信息*/
+						alert(textStatus);
+						alert(errorThrown);
+					}
+				});
+		});
+    </script>
+  </body>
+</html>

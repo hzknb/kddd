@@ -1,0 +1,42 @@
+*{
+	/*初始化 清除页面元素的内外边距*/
+	padding: 0;
+	margin: 0;
+	/*盒子模型*/
+	box-sizing: border-box;
+}
+
+/*对body进行调整*/
+body {
+	/*弹性布局 让页面元素垂直+水平居中*/
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	/*让页面始终占浏览器可视区域总高度*/
+	height: 100vh;
+	/*背景模糊*/
+	background-color: rgb(255, 255, 255);
+	/* background-image: url("/images/4.jpg"); */
+}
+
+/*对lastStamp进行调整*/
+#lastStamp{
+	position: relative;
+	width: 550px;
+	bottom: 20px;
+    color: rgb(0, 0, 0);
+	white-space:pre-line;
+    white-space:pre-wrap;
+	font-family: "黑体";
+	/* 居中 */
+	display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/*对train_data进行调整*/
+.train_data{
+	position: relative;
+	font-size: 25px;
+}

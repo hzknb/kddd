@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+	<!-- 初始设置 -->
+    <meta charset="utf-8" />
+    <title>模型蒸馏</title>
+    <link rel="stylesheet" type="text/css" href= "{{ url_for('static', filename = 'css/data.css') }}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  </head>
+  <body>
+    <div class="login">     
+		<!-- 数据展示区域 -->
+      	<div class="data">    
+			<p id="lastStamp" class="train_data">未开始训练</p>
+			<p id="img_title" class="img_title" style="display: none;position: relative;left: 300px;">模型转换准确率比对(epoch为学生模型训练周期)：</p>
+			<canvas id="img_compare" class="img_compare" style="display: none;position: relative;left: 150px;" width="1000"></canvas>
+      	</div>
+		<!-- 分割线 -->
+		<div><hr width="100%" style="border: 2px solid #232323;"/></div>
+		<!-- 数据展示区域 -->
+		<div class="start">    
+			<p id="writeData" class="start_data">开始训练</p>
+		</div>
+		<!-- 下载按钮 -->
+		<div class="control">
+			<ul>
+				<button class="c1" id="bt1"><a href="{{ url_for('static', filename = 'models/model.pdopt') }}" style="text-decoration: none;" download>pdopt下载</a></button>
+				<button class="c2" id="bt2"><a href="{{ url_for('static', filename = 'models/model.pdparams') }}" style="text-decoration: none;" download>pdparams下载</a></button>
+			</ul>
+		</div>
+    </div>
+<script type="text/javascript">
+	// 每1秒更新一次
+	$(document).ready(function() {
+		setInterval(function() {
+			$.ajax({
+				type: 'POST', // 请求类型为POST
+				url: 'http://localhost:5050/get_data', // 请求的URL地址
+				dataType: 'text',// 返回的数据类型为文本
+				jsonp:'jsoncallback',  // 使用jsonp格式处理跨域请求
+				async: true, // 使用同步操作 
+				cache: false, // 不使用缓存
+				timeout : 50000, //超时时间：50秒
+				success: function (result) {
+					//请求成功时执行该函数内容，result即为服务器返回的json对象
+					var a = document.getElementById('lastStamp');
+					a.textContent = result;
+				},
+				error: function (jqXHR, textStatus, errorThrown) {
+					/*弹出jqXHR对象的信息*/
+					alert(jqXHR.responseText);
+					alert(jqXHR.status);
+					/*弹出其他两个参数的信息*/
+					alert(textStatus);
+					alert(errorThrown);
+					alert("get_data失败")
+				}
+			});
+		}, 1000); // 每1秒更新一次
+	});
+	$(document).ready(function() {
+		setInterval(function() {
+			$.ajax({
+				type: 'POST', // 请求类型为POST
+				url: 'http://localhost:5050/train_process', // 请求的URL地址
+				dataType: 'text',// 返回的数据类型为文本
+				jsonp:'jsoncallback',  // 使用jsonp格式处理跨域请求
+				async: true, // 使用同步操作 
+				cache: false, // 不使用缓存
+				timeout : 50000, //超时时间：50秒
+				success: function (result) {
+					//请求成功时执行该函数内容，result即为服务器返回的json对象
+					var a = document.getElementById('writeData');
+					a.textContent = result;
+				},
+				error: function (jqXHR, textStatus, errorThrown) {
+					/*弹出jqXHR对象的信息*/
+					alert(jqXHR.responseText);
+					alert(jqXHR.status);
+					/*弹出其他两个参数的信息*/
+					alert(textStatus);
+					alert(errorThrown);
+					alert("train_process失败")
+				}
+			});
+		}, 1000); // 每1秒更新一次
+	});
+	$(document).ready(function() {
+		setInterval(function() {
+			$.ajax({
+				type: 'POST', // 请求类型为POST
+				url: 'http://localhost:5050/button', // 请求的URL地址
+				dataType: 'text',// 返回的数据类型为文本
+				jsonp:'jsoncallback',  // 使用jsonp格式处理跨域请求
+				async: true, // 使用同步操作 
+				cache: false, // 不使用缓存
+				timeout : 50000, //超时时间：50秒
+				success: function (result) {
+					//请求成功时执行该函数内容，result即为服务器返回的json对象
+					if(result == '训练完成')
+					{
+						// 训练完后的操作
+						var obt = document.getElementById("bt1");
+						obt.style.display = 'block';
+						var obt = document.getElementById("bt2");
+						obt.style.display = 'block';
+					}
+					else
+					{
+						// 训练过程中的操作
+						var obt = document.getElementById("bt1");
+						obt.style.display = 'nonoe';
+						var obt = document.getElementById("bt2");
+						obt.style.display = 'nonoe';
+					}
+				},
+				error: function (jqXHR, textStatus, errorThrown) {
+					/*弹出jqXHR对象的信息*/
+					alert(jqXHR.responseText);
+					alert(jqXHR.status);
+					/*弹出其他两个参数的信息*/
+					alert(textStatus);
+					alert(errorThrown);
+					alert("button失败")
+				}
+			});
+		}, 1000); // 每1秒更新一次
+	});
+	$(document).ready(function() {
+		setInterval(function() {
+			$.ajax({
+				type: 'POST', // 请求类型为POST
+				url: 'http://localhost:5050/img', // 请求的URL地址
+				dataType: 'json',// 返回的数据类型为json
+				jsonp:'jsoncallback',  // 使用jsonp格式处理跨域请求
+				async: true, // 使用同步操作 
+				cache: false, // 不使用缓存
+				timeout : 50000, //超时时间：50秒
+				success: function (result) {
+					//请求成功时执行该函数内容，result即为服务器返回的json对象
+					if(result[0] == '图片参数获取成功')
+					{
+						// 图片参数获取成功后的操作
+						var img = document.getElementById("img_compare");
+						var data = result.slice(1, result.length);
+						drawHorizontalBarChart(data, "img_compare");
+						img.style.display = 'block';
+						var img_title = document.getElementById("img_title");
+						img_title.style.display = 'block';
+					}
+					else
+					{
+						// 图片参数获取失败后的操作
+						var img = document.getElementById("img_compare");
+						img.style.display = 'none';
+						var img_title = document.getElementById("img_title");
+						img_title.style.display = 'none';
+						// alert("none")
+					}
+				},
+				error: function (jqXHR, textStatus, errorThrown) {
+					/*弹出jqXHR对象的信息*/
+					alert(jqXHR.responseText);
+					alert(jqXHR.status);
+					/*弹出其他两个参数的信息*/
+					alert(textStatus);
+					alert(errorThrown);
+					alert("图片失败")
+				}
+			});
+		}, 1000); // 每1秒更新一次
+	});
+	$(document).ready(function() {
+		// 页面开始时关闭“pdopt下载”按钮
+		var obt = document.getElementById("bt1");
+		obt.style.display = 'none';
+
+		// 页面开始时关闭“pdparams下载”按钮
+		var obt = document.getElementById("bt2");
+		obt.style.display = 'none';
+
+		// 页面开始时关闭绘图
+		var img = document.getElementById("compare");
+		img.style.display = 'none';
+
+		// 页面开始时关闭绘图的标题
+		var img_title = document.getElementById("img_title");
+		img_title.style.display = 'none';
+	});
+	// 绘制水平条状图的函数
+	function drawHorizontalBarChart(data, id) {
+		var canvas = document.getElementById(id);
+		var ctx = canvas.getContext('2d');
+
+		// 绘制水平条状图
+
+		// 初始参数设置
+		var x = 0;
+		var y = 0;
+		var height = 20; // 矩形的高度
+		var l = 100;
+
+		for (var i = 0; i < data.length; i+=2) {
+			var value = data[i+1];
+
+			// 设置label的格式
+			ctx.font = "15px Arial";
+			ctx.fillStyle = 'black';
+			ctx.fillText(data[i], 0, y+15);
+
+			// 绘制水平柱状图
+			if(i == data.length - 2){
+				ctx.fillStyle = 'orange';
+			}
+			else{
+				ctx.fillStyle = 'rgb(72, 66, 255)';
+			}
+			ctx.fillRect(x+l, y, value*6+l*(value/100), height);
+
+			y = y + 30;
+
+			// 绘制值标签
+			ctx.fillStyle = 'black';
+			ctx.font = '14px Arial';
+			ctx.fillText(value+"%", value*6+5+l+l*(value/100), y-15);
+		}
+	}
+</script>
+  </body>
+</html>

@@ -1,0 +1,198 @@
+*{
+	/*初始化 清除页面元素的内外边距*/
+	padding: 0;
+	margin: 0;
+	/*盒子模型*/
+	box-sizing: border-box;
+}
+
+/*对body进行调整*/
+body {
+	/*弹性布局 让页面元素垂直+水平居中*/
+	/* display: flex; */
+	justify-content: center;
+	align-items: center;
+	/*让页面始终占浏览器可视区域总高度*/
+	height: 100px;
+	/*背景模糊*/
+	background-color: rgb(255, 255, 255);
+	/* background-image: url("/images/4.jpg"); */
+}
+
+/*对login进行调整*/
+.login{
+	/*弹性布局 让子元素称为弹性项目*/
+	/* display: flex; */
+	/*让弹性项目垂直排列  原理是改变弹性盒子的主轴方向  
+	父元素就是弹性盒子  现在改变后的主轴方向是向下了*/
+	/* flex-direction: column; */
+	/*让弹性项目在交叉轴方向水平居中  现在主轴的方向是向下  
+	交叉轴的方向是与主轴垂直 交叉轴的方向是向右*/
+	width: 400px;
+	height: 800px;
+	padding: 50px;
+	top:80px;
+	left:-40px;
+	overflow: hidden;
+	background-color: rgb(190, 190, 190);
+	/* box-shadow: 0 15px 25px rgba(0, 0, 0, 0.4); */
+	font-size: 25px;
+	position: relative;
+}
+
+/*对argu进行调整*/
+.argu{
+	position: relative;
+	top:75px;
+}
+
+/*对pra进行调整*/
+.pra{
+	position: relative;
+	top:50px;
+}
+
+/*对argu_title进行调整*/
+.argu_title{
+	position: relative;
+	width: 125px;
+	font-weight:bold;
+	font-size: 15px;
+	font-family:"黑体";
+}
+
+/*对pra_title进行调整*/
+.pra_title{
+	position: relative;
+	width: 125px;
+	font-weight: bold;
+	font-size: 15px;
+	font-family:"黑体";
+}
+
+/*对input进行调整*/
+.input{
+	outline-style: none ;
+	border: 2px solid #232323; 
+    border-radius: 5px;
+    padding: 6px;
+	font-size: 14px;
+    font-family: "Microsoft soft";
+}
+
+/*对titl进行调整*/
+.titl{
+	font-weight: bolder;
+	font-size: 30px;
+	font-family:"黑体";
+}
+
+/*对control1进行调整*/
+.control1{
+	position: relative;
+	font-family:"黑体";
+}
+
+/*对control进行调整*/
+.control{
+	position: relative;
+	top: -20px;
+	left: 85px;
+}
+
+/*对start进行调整*/
+.start{
+	position: relative;
+}
+
+/*对button进行调整*/
+.button{
+	font-size: 20px;
+	width: 120px;
+	height: 40px;
+	background-color:#2A2A9A;
+	color: #fffdfd;
+	outline-style: none ;
+	border: none;
+    border-radius: 5px;
+    padding: 6px;
+    font-family: "Microsoft soft";
+}
+
+/*对process进行调整*/
+.process{
+	position: relative;
+	width:220px;
+	bottom: 40px;
+    color: rgb(0, 0, 0);
+	font-weight: bold;
+	font-family: "黑体";
+}
+
+/*对Frame进行调整*/
+.Frame{
+	position: relative;
+	top:-650px;
+	left: 400px;
+}
+
+/*对process进行调整*/
+.process{
+	position: relative;
+	font-size: 25px;
+	top:-5px;
+}
+
+/*对container进行调整*/
+#container{
+	position: fixed;
+	width: 100%;
+	margin: 0 auto;
+	top:0;
+	z-index:10;
+}
+
+/*对top进行调整*/
+.top{
+	height: 100px;
+	background-color: #2A2A9A;
+	
+}
+
+/*对top_left进行调整*/
+.top_left{
+	float: left;
+}
+
+/*对top_left img进行调整*/
+.top_left img{
+	width: 80px;
+	height: 80px;
+	margin: 10px;
+	display: inline-block;
+}
+
+/*对top_name进行调整*/
+.top_name{
+	position: relative;
+	left:300px;
+	line-height: 100px;
+	color: white;
+	font-size: 50px;
+	font-family: "黑体";
+	text-align: center;
+	float: left;
+}
+
+/*对top_group进行调整*/
+.top_group{
+	position: relative;
+	left: 0px;
+	top:50px;
+	line-height: 50px;
+	color: white;
+	font-size: 25px;
+	font-family: "黑体";
+	text-align: center;
+	float: left;
+}
